@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource name="jdbc/DistDB"
+		auth="Container"
+		type="javax.sql.DataSource"
+		maxActive="100"
+		maxIdle="30"
+		maxWait="10000"
+		username="mysql.sys"
+		password="abylay25"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://google/se_project?cloudSqlInstance=testproject-189116:us-central1:se2018&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;useSSL=false"/>	
+</Context>
