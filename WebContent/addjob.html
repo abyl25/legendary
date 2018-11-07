@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments :: headerFragment"></head>
+<body class="work-page">
+
+<nav th:replace="fragments :: recruiterNavbar(${highLightPostJob}, ${highLightPostList}, ${highLightSearch})"></nav>
+
+<div class="container">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default card card-3">
+            <div class="panel-body">
+
+                <!--<div class="text-center feedback">-->
+                    <!--<h2 th:text="'Resume for ' + ${firstAndLastName}"></h2>-->
+                    <!--<span class="glyphicon glyphicon-briefcase"></span>-->
+                    <!--<span th:text="${currentNumRecords} + ' of 10 work experiences entered'"></span>-->
+                <!--</div>-->
+
+                <form action="#" th:action="@{/addjob}" th:object="${newJob}" method="post">
+                    <!-- need this or id is zero every time and keep getting additional records when updating -->
+                    <input type="hidden" th:field="*{id}" />
+                    <!-- need this or person_id attached to ed id is null every time -->
+                    <input type="hidden" th:field="*{myPerson.id}"/>
+
+
+                    <div class="form-group">
+                        <label class="section-heading" for="title">Title</label>
+                        <input id="title" class="form-control" type="text" th:field="*{title}" autofocus/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-heading" for="employer">Employer</label>
+                        <input id="employer" class="form-control" type="text" th:field="*{employer}"/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('employer')}" th:errors="*{employer}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-heading" for="minSalary">Minimum Salary</label>
+                        <select id="minSalary" class="form-control" th:field="*{minSalary}">
+                            <option th:each="i : ${#numbers.sequence(0, 1000000, 5000)}"
+                                    th:value="${i}" th:text="'$' + ${i}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-heading" for="maxSalary">Maximum Salary</label>
+                        <select id="maxSalary" class="form-control" th:field="*{maxSalary}">
+                            <option th:each="i : ${#numbers.sequence(0, 1000000, 5000)}"
+                                    th:value="${i}" th:text="'$' + ${i}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-heading" for="description">Description</label>
+                        <input id="description" class="form-control" type="text" th:field="*{description}"/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="section-heading" for="skill">Select Up to Three Skills</label>
+                        <select id="skill" class="form-control" name="selectedSkillNameOne">
+                            <option th:each="item : ${skillNames}"
+                                    th:value="${item}"
+                                    th:text="${item}"></option>
+                        </select>
+                    </div>
+                    <label class="section-heading" for="expertId">Expert</label>
+                    <input checked type="radio" name="ratingOne" id="expertId" value="Expert"/>
+                    <label class="section-heading" for="proficientId">Proficient</label>
+                    <input type="radio" name="ratingOne" id="proficientId" value="Proficient"/>
+                    <label class="section-heading" for="familiarId">Familiar</label>
+                    <input type="radio" name="ratingOne" id="familiarId" value="Familiar"/>
+
+                    <br/>
+                    <br/>
+
+                    <div class="form-group">
+                        <!--<label class="section-heading" for="skillTwo">Select a Skill</label>-->
+                        <select id="skillTwo" class="form-control" name="selectedSkillNameTwo">
+                            <option th:each="item : ${skillNames}"
+                                    th:value="${item}"
+                                    th:text="${item}"></option>
+                        </select>
+                    </div>
+                    <label class="section-heading" for="expertIdTwo">Expert</label>
+                    <input checked type="radio" name="ratingTwo" id="expertIdTwo" value="Expert"/>
+                    <label class="section-heading" for="proficientIdTwo">Proficient</label>
+                    <input type="radio" name="ratingTwo" id="proficientIdTwo" value="Proficient"/>
+                    <label class="section-heading" for="familiarIdTwo">Familiar</label>
+                    <input type="radio" name="ratingTwo" id="familiarIdTwo" value="Familiar"/>
+
+                    <br/>
+                    <br/>
+
+                    <div class="form-group">
+                        <!--<label class="section-heading" for="skillThree">Select a Skill</label>-->
+                        <select id="skillThree" class="form-control" name="selectedSkillNameThree">
+                            <option th:each="item : ${skillNames}"
+                                    th:value="${item}"
+                                    th:text="${item}"></option>
+                        </select>
+                    </div>
+                    <label class="section-heading" for="expertIdThree">Expert</label>
+                    <input checked type="radio" name="ratingThree" id="expertIdThree" value="Expert"/>
+                    <label class="section-heading" for="proficientIdThree">Proficient</label>
+                    <input type="radio" name="ratingThree" id="proficientIdThree" value="Proficient"/>
+                    <label class="section-heading" for="familiarIdThree">Familiar</label>
+                    <input type="radio" name="ratingThree" id="familiarIdThree" value="Familiar"/>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!--<div class="table-responsive">-->
+                        <!--<table class="table table-hover table-condensed">-->
+                            <!--<caption>-->
+                                <!--<h3><b>Desired Skills</b></h3>-->
+                            <!--</caption>-->
+
+                            <!--<tbody>-->
+                            <!--&lt;!&ndash; TODO it would be cool to have a set of radio buttons inline with each skill so recruiter could choose rating &ndash;&gt;-->
+                            <!--&lt;!&ndash; tricky getting these ratings back to the controller post route..... &ndash;&gt;-->
+                                <!--<th:block th:each="item : ${#lists.sort(skills)}">-->
+                                    <!--<tr>-->
+                                        <!--&lt;!&ndash; checked skill ids will be available as request params in controller post route &ndash;&gt;-->
+                                        <!--<td><input type="checkbox" name="checkedIds" th:value="${item.id}"/></td>-->
+                                        <!--<td th:text="${item.skill}"></td>-->
+                                    <!--</tr>-->
+                                <!--</th:block>-->
+                            <!--</tbody>-->
+
+                        <!--</table>-->
+                    <!--</div>-->
+
+
+                    <div class="clearfix"></div>
+                    <input class="btn btn-primary bold-input" type="submit" value="Submit"/>
+                    <!-- TODO make the delete button align to the right -->
+                    <a class="btn btn-warning bold-input" th:href="@{|/delete/*{id}?type=job|}"><b>Delete</b></a>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div><!-- container -->
+
+<!-- Footer -->
+<footer th:replace="fragments :: footer"></footer>
+
+<!-- javascript -->
+<!-- th:block goes away after processing, but what's inside stays, so it won't affect the page layout -->
+<th:block th:replace="fragments :: javaScriptTemplate"></th:block>
+
+</body>
+
+</html>

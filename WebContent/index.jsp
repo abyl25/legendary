@@ -13,18 +13,20 @@
 	</style>
 </head>
 <body>
+	
 	<% String home = request.getContextPath() + "/"; %> 
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	 	<a href="<%=home%>" class="navbar-brand">NU Legendary</a>
+	 	<a href="<%=home%>" class="navbar-brand">Legendary</a>
 
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  	</button>
 		<div class="collapse navbar-collapse col-6" id="navbarNavAltMarkup">
 			<div class="navbar-nav">				
-			  	<a class="nav-item nav-link active" href="<%=home%>">Home <span class="sr-only">(current)</span></a>			  	
+			  	<a class="nav-item nav-link active" href="<%=home%>">Home <span class="sr-only">(current)</span></a>	
+			  	<a class="nav-item nav-link text-white" href="<%=home + "search.jsp"%>">Search</a>		  	
 			  <!-- <a class="nav-item nav-link" href="#">Features</a> -->
-			  <!-- <a class="nav-item nav-link" href="#">Pricing</a> -->
 			</div>
 		</div>
 		<form class="form-inline my-2 my-lg-0" id="login-form" method="post" action="signin">

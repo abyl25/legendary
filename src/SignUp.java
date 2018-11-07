@@ -95,7 +95,7 @@ public class SignUp extends HttpServlet {
         }
         
         if (conn != null) {
-        	out.append("Database connection established\n");
+//        	out.append("Database connection established\n");
         	
         	try {
         		String users = "users";
@@ -103,7 +103,7 @@ public class SignUp extends HttpServlet {
         		ResultSet tables = dbm.getTables(null, null, users, null);
         		
         		if (tables.next()) {
-        			out.append("Table exists in DB: " + users + "\n");
+//        			out.append("Table exists in DB: " + users + "\n");
         			
 	       	 		Statement statement = (Statement) conn.createStatement();
 	       	 		
@@ -121,14 +121,28 @@ public class SignUp extends HttpServlet {
 	       	 		String query = "INSERT INTO "+ users+ " (id, first_name, last_name, email, password) VALUES"
 		   	       			+ "(NULL, "+ "'" + first_name +"', " + "'"+ second_name +"', " + "'"+email+"', "+ "'"+password+"'"+")";   	    
 		   	       	int c = statement.executeUpdate(query);			   	       	
-		   	       	if (c > 0) {
-		   	       		out.append("Data inserted successfully\n");
-		   	       	} else {
-		   	       		out.append("Data insertion failed\n");
-		   	       	}
+//		   	       	if (c > 0) {
+//		   	       		out.append("Data inserted successfully\n");
+//		   	       	} else {
+//		   	       		out.append("Data insertion failed\n");
+//		   	       	}
+		   	       	
+		   	       	int user_id = 0;
+		   	       	String query3 = "SELECT id FROM users WHERE email='" + email + "'";
+	       	 		ResultSet resultSet3 = statement.executeQuery(query3);
+		       	 	if (resultSet3.next()) {		       	 		
+		       	 		user_id = resultSet3.getInt("id");
+	       	 		}
+		       	 	
+//		   	       	int user_id = 0;
+//			   	    ResultSet rs = statement.getGeneratedKeys();
+//			        if (rs.next()){
+//			            user_id = rs.getInt(1);
+//			        }
 		   	       	
 		   	       	// Store user data into Session
 		   	       	HttpSession session = request.getSession(true);
+		   	       	session.setAttribute("user_id", user_id);		   	       	
 		   	       	session.setAttribute("first_name", first_name);
 		   	        session.setAttribute("last_name", second_name);
 		   	       	session.setAttribute("email", email);

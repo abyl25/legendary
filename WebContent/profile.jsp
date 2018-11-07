@@ -27,6 +27,7 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="com.mysql.cj.jdbc.Driver" %>
+<jsp:include page="header.jsp"/>
 
 <% 
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -36,14 +37,22 @@ response.setHeader("Expires", "0");
 if(session.getAttribute("first_name") == null) {
 	response.sendRedirect("index.jsp");	
 }
-
 %>
-<jsp:include page="header.jsp"/>
+<% 
+Integer user_id_obj = (Integer)session.getAttribute("user_id");
+int user_id = 0;
+if (user_id_obj != null) {
+	user_id = user_id_obj.intValue();
+}
+String first_name = (String)session.getAttribute("first_name");
+String last_name = (String)session.getAttribute("last_name");
+String email = (String)session.getAttribute("email");
+%>
 
 <div class="container emp-profile">
-			<!-- <input type="button" value="Log out" class="btn btn-danger float-right" id="logout-btn"> -->
-			<form action="logout" method="post">
-			    <input type="submit" value="Log out" class="btn btn-danger float-right" id="logout-btn">
+			 
+			<form action="editprofile" method="post" class="">
+			    <input type="submit" value="Edit Profile" class="btn btn-primary float-right" id="logout-btn">
 			</form>
 			
             <form method="post">
@@ -60,14 +69,9 @@ if(session.getAttribute("first_name") == null) {
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                        <% 
-                                        String first_name = (String)session.getAttribute("first_name");
-                                        String last_name = (String)session.getAttribute("last_name");
-                                        String email = (String)session.getAttribute("email");
-                                        %>
-                                        <% out.println(first_name + " " + last_name); %>
-                                        
+                                    <h5>                                      
+                                        <% out.println(first_name + " " + last_name);                                        		
+                                        %>                                       
                                     </h5>
                                     <h6>
                                         Web Developer and Designer                                        
@@ -82,9 +86,13 @@ if(session.getAttribute("first_name") == null) {
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="button" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    <!-- 
+                    <div class="col-md-2">                  
+                   			<div class="form-group has-error">
+                    			<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    		</div>                      
                     </div>
+                     -->
                 </div>
                 <div class="row">
                     <div class="col-md-4">
