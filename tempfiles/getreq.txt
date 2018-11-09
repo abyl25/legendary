@@ -1,0 +1,24 @@
+	<!-- 	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#search-job").click(function(){
+			var host = 'data.usajobs.gov'; 
+			var userAgent = 'abylay.tastanbekov@nu.edu.kz';
+			var authKey = '47U9piIWBORGHkOZXDoAe1SQaFK7P4sMKiUjG0HD9kE=';
+			
+			$.ajax({
+				url: 'https://data.usajobs.gov/api/search?Keyword=Software', 
+				method: 'GET',
+				headers: {          
+			        "Host": host,          
+			        "User-Agent": userAgent,          
+			        "Authorization-Key": authKey      
+			    },  
+				success: function(result){
+		        	$("#search-result").html(result);
+		    	}
+			});
+		});
+	});	
+	</script>
+	 -->

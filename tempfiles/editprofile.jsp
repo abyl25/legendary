@@ -28,7 +28,9 @@ if (session.getAttribute("first_name") != null) {
 } 		
 %>
 
+<%-- 
 <jsp:include page="header.jsp"/>
+--%>
 
 <!------ Include the above in your HEAD tag ---------->
 <div class="container">               

@@ -1,6 +1,8 @@
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -52,17 +54,33 @@ public class EditProfile extends HttpServlet {
 		try {
 			HttpSession session = request.getSession(true);
 			String fname = (String) session.getAttribute("first_name");
+			Integer user_id_obj = (Integer) session.getAttribute("user_id");
+			int user_id = 0;
+			if (user_id_obj != null) {
+				user_id = user_id_obj.intValue();
+			} else {
+				return;
+			}
 			
-			
-			Statement statement = (Statement) conn.createStatement();
-			String query = "";
-			int c = statement.executeUpdate(query);	
-			
+			String query = "INSERT INTO profile (user_id, age, profession, education, major, skills, work_link, phone, photo) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement prepStatement = conn.prepareStatement(query);
+			prepStatement.setInt(1, user_id);
+			prepStatement.setString(2, age);
+			prepStatement.setString(3, profession);
+			prepStatement.setString(4, education);
+			prepStatement.setString(5, skills);
+			prepStatement.setString(6, salary);
+			prepStatement.setString(7, availability);
+			prepStatement.setString(8, links);
+			prepStatement.setString(9, phone);
+			prepStatement.execute();
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("editprofile.jsp");
+		response.sendRedirect("profile.jsp");
 	}
 
 }

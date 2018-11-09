@@ -25,8 +25,8 @@
 		<div class="collapse navbar-collapse col-6" id="navbarNavAltMarkup">
 			<div class="navbar-nav">				
 			  	<a class="nav-item nav-link active" href="<%=home%>">Home <span class="sr-only">(current)</span></a>	
-			  	<a class="nav-item nav-link text-white" href="<%=home + "search.jsp"%>">Search</a>		  	
-			  <!-- <a class="nav-item nav-link" href="#">Features</a> -->
+			  	<a class="nav-item nav-link text-white" href="<%=home + "search.jsp"%>">Search</a>		
+			  	  	
 			</div>
 		</div>
 		<form class="form-inline my-2 my-lg-0" id="login-form" method="post" action="signin">

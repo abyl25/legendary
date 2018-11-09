@@ -1,3 +1,11 @@
 MyServlet.class
+DbConnection.class
+Search.class
+Logout.class
+User.class
+SearchPeople.class
 SignIn.class
 SignUp.class
+Users_service.class
+Vacancy.class
+EditProfile.class

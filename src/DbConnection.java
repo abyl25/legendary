@@ -29,7 +29,8 @@ public class DbConnection {
 //                String password = prop.getProperty("password");
 //                Class.forName(driver);
     		} catch(SQLException | ClassNotFoundException e) {
-    			e.printStackTrace();
+//    			e.printStackTrace();
+    			System.out.println(e);
     		}
     		
     		return conn;

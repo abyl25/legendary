@@ -1,14 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//package webapp;
-
-/**
- *
- * @author Yerassyl
- */
 import javax.servlet.RequestDispatcher;
 
 import java.io.IOException;
@@ -29,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import com.mysql.cj.api.jdbc.Statement;
 
 
-
 @WebServlet(urlPatterns = { "/signin" })
 public class SignIn extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -43,11 +31,6 @@ public class SignIn extends HttpServlet {
         conn = DbConnection.getConnection();
     }
 
-    /* protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-    } */
-    
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
         throws ServletException , IOException {
 //        response.setContentType("text/jsp");

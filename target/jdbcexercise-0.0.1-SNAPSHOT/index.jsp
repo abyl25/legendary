@@ -1,42 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LinkedIn</title>
+	<title>Legendary</title>
 	<link rel="stylesheet" type="text/css" href="footer.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<style>
+	</style>
 </head>
 <body>
+	
+	<% String home = request.getContextPath() + "/"; %> 
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">
-		    <!-- <img src="linkedin.png" width="120" height="30" class="d-inline-block align-top" alt=""> -->	
-		    <!-- <img src="Logo-2CRev-128px-TM.png" width="110" height="28" class="d-inline-block align-top" alt="">    -->
-		    <a href="#" class="navbar-brand">NU Legendary</a>		    
-	 	</a>
-  		<!-- <a class="navbar-brand" href="#">LinkedIn</a> -->
+	 	<a href="<%=home%>" class="navbar-brand">Legendary</a>
+
 	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  	</button>
 		<div class="collapse navbar-collapse col-6" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-			  <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-			  <!-- <a class="nav-item nav-link" href="#">Features</a> -->
-			  <!-- <a class="nav-item nav-link" href="#">Pricing</a> -->
+			<div class="navbar-nav">				
+			  	<a class="nav-item nav-link active" href="<%=home%>">Home <span class="sr-only">(current)</span></a>	
+			  	<a class="nav-item nav-link text-white" href="<%=home + "search.jsp"%>">Search</a>		
+			  	  	
 			</div>
 		</div>
 		<form class="form-inline my-2 my-lg-0" id="login-form" method="post" action="signin">
-      		<input class="form-control mr-sm-2 pt-1 pb-1" type="text" placeholder="First Name" name="login-fname">
-      		<input class="form-control mr-sm-2 pt-1 pb-1" type="text" placeholder="Last Name" name="login-lname">
+      		<input class="form-control mr-sm-2 pt-1 pb-1" type="text" placeholder="email" name="login-email">
+      		<input class="form-control mr-sm-2 pt-1 pb-1" type="password" placeholder="password" name="login-password" autocomplete="off">
       		<button class="btn btn-outline-success my-2 my-sm-0 pt-1 pb-1" type="submit">Log in</button>
       		<!-- <a href="#" class="">Forgot password?</a> -->
     	</form>
 	</nav>
-
+	
+	<% if(session.getAttribute("first_name") != null) response.sendRedirect("profile.jsp"); %>
+	${message} 
+	<c:remove var="message" scope="session" />
+	
 	<div class="container-fluid bg-light py-3">
 	    <div class="row pt-4">
 	        <div class="col-md-6 mx-auto">
@@ -72,7 +76,7 @@
                         </div> -->
                         <div class="checkbox">
                             <label class="small">
-                                <input name="terms" type="checkbox">I have read and agree to the <a href="#">terms of service</a>
+                                <input name="terms" type="checkbox">I have read and agree to the terms of service
                             </label>
                         </div>
                         <input class="btn btn-lg btn-primary btn-block" value="Sign Up" type="submit">
@@ -167,8 +171,6 @@
     </div>
   </div>
 </footer>
-
-
 
 </body>
 </html>
