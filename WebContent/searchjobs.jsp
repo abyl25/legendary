@@ -35,6 +35,16 @@
 	<%@	page import="Search" %>
 	--%>
 	
+<% 
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+response.setHeader("Pragma", "no-cache");
+response.setHeader("Expires", "0");
+
+if(session.getAttribute("first_name") == null) {
+	response.sendRedirect("index.jsp");	
+}
+%>
+
 	<div class="container py-3">
 		<h4>Search jobs</h4>
 		<div>
@@ -106,9 +116,11 @@
 										
 					var users_arr = JSON.parse(sessionStorage.getItem("jobs_list"));
 					users_arr.forEach(function(e) {
-						$("#search-result").append("<li class='list-group-item w-75'>Title: <a href='#' class=''>"+ e.title+"</a>&nbsp;&nbsp;&nbsp; Type: <a href='#' class=''>" + e.vacancy_type +"</a>"+
-					"<hr><p>Description</p>"+
-					"<p class='pt-1 mt-1'>"+ e.description+"</p></li>");
+						$("#search-result").append("<li class='list-group-item w-75 li-click'>Title: <a href='#' class='a-click'>"+ 
+								e.title+"</a>&nbsp;&nbsp;&nbsp; Category: <a href='#' class=''>" + 
+								e.vacancy_type +"</a> &nbsp;&nbsp;&nbsp; Company: <a href='#'>"+ e.company_name + "</a>"+
+							"<hr><p>Description</p>"+
+							"<p class='pt-1 mt-1'>"+ e.description+"</p> Address: " + e.address + "</li>");
 					});	
 				}
 			});
@@ -119,9 +131,11 @@
 			var users_arr = JSON.parse(sessionStorage.getItem("jobs_list"));
 			users_arr.forEach(function(e) {
 				$("#search-result").append(
-					"<li class='list-group-item w-75 li-click'><a class='a-click' href='#' id='user-profile' data-id='"+ 
-					e.id +"'>"+ e.title +"</a>&nbsp;&nbsp;&nbsp;  <a href='#' class=''>" + e.vacancy_type +"</a>"+ 
-					"<p class='pt-1 mt-1'>"+ e.description +"</p></li>"
+					"<li class='list-group-item w-75 li-click'>Title: <a class='a-click' href='#' id='user-profile' data-id='"+ 
+					e.id +"'>"+ e.title + "</a>&nbsp;&nbsp;&nbsp; Category: <a href='#' class=''>" + 
+					e.vacancy_type +"</a> &nbsp;&nbsp;&nbsp; Company: <a href='#'>"+ e.company_name + "</a>"+
+					"<hr><p>Description</p><p class='pt-1 mt-1'>"+ 
+					e.description +"</p> Address: " + e.address + "</li>"
 				);
 			});		
 		}

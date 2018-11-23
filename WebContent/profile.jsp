@@ -30,16 +30,21 @@
 <%@ page import="com.mysql.cj.jdbc.Driver" %>
 <jsp:include page="header.jsp"/>
 
+<%-- 
+if(session.getAttribute("first_name") == null) {
+	response.sendRedirect("index.jsp");	
+}
+--%>
 <% 
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
 
-if(session.getAttribute("first_name") == null) {
+if(session.getAttribute("user") == null) {
 	response.sendRedirect("index.jsp");	
 }
 %>
-<% 
+<%-- 
 Integer user_id_obj = (Integer)session.getAttribute("user_id");
 int user_id = 0;
 if (user_id_obj != null) {
@@ -48,12 +53,22 @@ if (user_id_obj != null) {
 String first_name = (String)session.getAttribute("first_name");
 String last_name = (String)session.getAttribute("last_name");
 String email = (String)session.getAttribute("email");
+--%>
+
+<% 
+User user = (User)session.getAttribute("user");
+int user_id = user.id;
+String first_name = user.fname;
+String last_name = user.lname;
+String email = user.email;
+
 %>
 
 <div class="container emp-profile">
 			 
 			<form action="editprofile" method="post" class="">
-			    <input type="submit" value="Edit Profile" class="btn btn-primary float-right" id="logout-btn">
+				<a href='editprofile.jsp' class="btn btn-primary float-right">Edit Profile</a>
+			    <!--  <input type="submit" value="Edit Profile" class="btn btn-primary float-right" id="edit-btn"> -->
 			</form>
 			
             <form method="post">
@@ -71,8 +86,8 @@ String email = (String)session.getAttribute("email");
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>                                      
-                                        <% out.println(first_name + " " + last_name);                                        		
-                                        %>                                       
+                                        <%-- out.println(first_name + " " + last_name);                                        		
+                                        --%>                                       
                                     </h5>
                                     <h6>
                                         Web Developer and Designer                                        
@@ -99,15 +114,19 @@ String email = (String)session.getAttribute("email");
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
+                            <!--
+                            <a href="#">Website Link</a><br/>
+                            <a href="#">Bootsnipp Profile</a><br/>
+                            <a href="#">Bootply Profile</a>
+                            -->
+                            <p>SKILLS</p>                           
+                            <!--  
+                            <a href="#">Web Designer</a><br/>
+                            <a href="#">Web Developer</a><br/>
+                            <a href="#">WordPress</a><br/>
+                            <a href="#">WooCommerce</a><br/>
+                            <a href="#">PHP, .Net</a><br/>
+                            -->
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -118,23 +137,23 @@ String email = (String)session.getAttribute("email");
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><% out.println(first_name+" "+ last_name); %></p>
+                                                <p><%-- out.println(first_name+" "+ last_name); --%></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label> 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%-- out.println(email); --%></p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Age</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>21</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
                                             <div class="col-md-6">                                            	
-                                                <p><% out.println(email); %></p>
+                                                <p></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -142,7 +161,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Current Occupation</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Student</p>
+                                                <p></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -150,9 +169,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Education</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Nazarbayev University </p>
-                                                <p>2015 - 2020 </p>
-
+                                                <p></p>                                               
                                             </div>
                                         </div>
                                         <div class="row">
@@ -160,7 +177,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -168,7 +185,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Profession</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+                                                <p></p>
                                             </div>
                                         </div>
                             </div>
@@ -178,7 +195,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Experience</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                                <p></p> <!-- Expert -->
                                             </div>
                                         </div>
                                         <div class="row">
@@ -186,7 +203,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Hourly Rate</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>10$/hr</p>
+                                                <p></p>  <!-- 10$/hr -->
                                             </div>
                                         </div>
                                         <div class="row">
@@ -194,7 +211,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Total Projects</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>230</p>
+                                                <p></p>  <!-- 230 -->
                                             </div>
                                         </div>
                                         <div class="row">
@@ -202,7 +219,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>English Level</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                                <p></p>  <!-- Expert -->
                                             </div>
                                         </div>
                                         <div class="row">
@@ -210,7 +227,7 @@ String email = (String)session.getAttribute("email");
                                                 <label>Availability</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>6 months</p>
+                                                <p></p>  <!-- 6 months -->
                                             </div>
                                         </div>
                                 <div class="row">
@@ -228,9 +245,9 @@ String email = (String)session.getAttribute("email");
         
 <script>
 	$(document).ready(function (){
-		$("#logout-btn").on('click', function() {
-			
-		});
+		//$("#logout-btn").on('click', function() {
+		//	
+		//});
 	});
 </script>
 

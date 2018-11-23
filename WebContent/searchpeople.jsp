@@ -16,17 +16,15 @@
 	<jsp:include page="header.jsp"/>
 	<%@ page import="java.util.*" %>
 	
-	<%--
-	Integer user_id_obj = (Integer)session.getAttribute("user_id");
-	int user_id = 0;
-	if (user_id_obj != null) {
-		user_id = user_id_obj.intValue();
+	<% 
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Expires", "0");
+	
+	if(session.getAttribute("first_name") == null) {
+		response.sendRedirect("index.jsp");	
 	}
-	--%>
-	<%--
-	String json = (String)session.getAttribute("users_json");
-	out.println("users_json in jsp: " + json);
-	--%>
+	%>
 	
 	<div class="container py-3"> 
 		<h4>Search People</h4>	
@@ -43,7 +41,8 @@
 		
 	<%  String home = request.getContextPath() + "/"; %>
 		
-	<script type="text/javascript">		
+	<script type="text/javascript">	
+	
 	$(document).ready(function (){
 		items = [];
 		

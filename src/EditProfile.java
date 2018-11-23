@@ -38,11 +38,15 @@ public class EditProfile extends HttpServlet {
 		String age = request.getParameter("profile-age");
 		String profession = request.getParameter("profile-profession");
 		String education = request.getParameter("profile-education");
+		String major = request.getParameter("profile-major");
 		String skills = request.getParameter("profile-skills");
-		String salary = request.getParameter("profile-salary");
-		String availability = request.getParameter("profile-availability");
+		String experience = request.getParameter("profile-experience");
 		String links = request.getParameter("profile-links");
-		String phone = request.getParameter("profile-phone");
+		String bio = request.getParameter("profile-bio");
+		
+//		String salary = request.getParameter("profile-salary");
+//		String availability = request.getParameter("profile-availability");
+//		String phone = request.getParameter("profile-phone");
 		
 		String message = "";
 		
@@ -53,7 +57,8 @@ public class EditProfile extends HttpServlet {
 		
 		try {
 			HttpSession session = request.getSession(true);
-			String fname = (String) session.getAttribute("first_name");
+			String first_name = (String) session.getAttribute("first_name");
+			String last_name = (String) session.getAttribute("last_name");
 			Integer user_id_obj = (Integer) session.getAttribute("user_id");
 			int user_id = 0;
 			if (user_id_obj != null) {
@@ -62,18 +67,26 @@ public class EditProfile extends HttpServlet {
 				return;
 			}
 			
-			String query = "INSERT INTO profile (user_id, age, profession, education, major, skills, work_link, phone, photo) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO profile (id, user_id, first_name, last_name, age, education, major, profession, skills, links, bio) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement prepStatement = conn.prepareStatement(query);
-			prepStatement.setInt(1, user_id);
-			prepStatement.setString(2, age);
-			prepStatement.setString(3, profession);
-			prepStatement.setString(4, education);
-			prepStatement.setString(5, skills);
-			prepStatement.setString(6, salary);
-			prepStatement.setString(7, availability);
+			int id = 1;
+
+			prepStatement.setInt(1, id);
+			prepStatement.setInt(2, user_id);
+			prepStatement.setString(3, first_name);
+			prepStatement.setString(4, last_name);
+			prepStatement.setString(5, age);
+			prepStatement.setString(6, education);
+			prepStatement.setString(7, major);
+			prepStatement.setString(8, profession);
+			prepStatement.setString(9, skills);
 			prepStatement.setString(8, links);
-			prepStatement.setString(9, phone);
+			prepStatement.setString(9, bio);
+			
+//			prepStatement.setString(6, salary);
+//			prepStatement.setString(7, availability);
+			
 			prepStatement.execute();
 				
 		} catch (SQLException e) {

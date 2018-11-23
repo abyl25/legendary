@@ -38,6 +38,7 @@ if (session.getAttribute("first_name") != null) {
 				<div class="card card-body">	
 					<h3 class="text-center my-3 pb-3">Edit profile</h3>
 					<!--  <h3 class="card-title">Card title</h3> -->
+					
 					<form action="editprofile" method="post">
 						<div class="form-group">	
 							<input class="form-control" type="text" name="profile-age" placeholder="Age">			
@@ -49,23 +50,30 @@ if (session.getAttribute("first_name") != null) {
 							<input class="form-control" type="text" name="profile-education" placeholder="Education">			
 						</div>
 						<div class="form-group">
+							<input class="form-control" type="text" name="profile-major" placeholder="Major">			
+						</div>
+						<div class="form-group">
 							<input class="form-control" type="text" name="profile-experience" placeholder="Experience">			
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="text" name="profile-skills" placeholder="Skills">			
 						</div>
-						<div class="form-group">
+						
+						<!-- <div class="form-group">
 							<input class="form-control" type="text" name="profile-salary" placeholder="Salary">			
-						</div>
+						</div>  
 						<div class="form-group">
 							<input class="form-control" type="text" name="profile-availability" placeholder="Availability">			
-						</div>
+						</div> 
+						<div class="form-group">
+							<input class="form-control" type="text" name="profile-phone" placeholder="Phone">			
+						</div> -->
 						
 						<div class="form-group">
 							<input class="form-control" type="text" name="profile-links" placeholder="Links">			
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="text" name="profile-phone" placeholder="Phone">			
+							<textarea class="form-control" name="profile-bio" placeholder="Bio Description"></textarea>			
 						</div>
 						
 						<input class="btn btn btn-success btn-block" type="submit" name="profile-edit" value="Edit">

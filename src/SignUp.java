@@ -120,10 +120,23 @@ public class SignUp extends HttpServlet {
 //		   	       	}
 		   	       	
 		   	       	int user_id = 0;
+		   	       	String fname="";
+		       	 	String lname="";
+		       	 	String user_email="";
+		       	 	User user = new User();
+		       	 	
 		   	       	String query3 = "SELECT id FROM users WHERE email='" + email + "'";
 	       	 		ResultSet resultSet3 = statement.executeQuery(query3);
 		       	 	if (resultSet3.next()) {		       	 		
 		       	 		user_id = resultSet3.getInt("id");
+			       	 	fname = resultSet2.getString("first_name");
+	        			lname = resultSet2.getString("last_name"); 
+	        			user_email = resultSet2.getString("email");
+	        			
+	        			user.id = user_id;
+	        			user.fname = fname;
+	        			user.lname = lname;
+	        			user.email = user_email;
 	       	 		}
 		       	 	
 //		   	       	int user_id = 0;
@@ -134,10 +147,12 @@ public class SignUp extends HttpServlet {
 		   	       	
 		   	       	// Store user data into Session
 		   	       	HttpSession session = request.getSession(true);
-		   	       	session.setAttribute("user_id", user_id);		   	       	
-		   	       	session.setAttribute("first_name", first_name);
-		   	        session.setAttribute("last_name", second_name);
-		   	       	session.setAttribute("email", email);
+		   	       	session.setAttribute("user", user);
+		   	       	
+//		   	       	session.setAttribute("user_id", user_id);		   	       	
+//		   	       	session.setAttribute("first_name", first_name);
+//		   	        session.setAttribute("last_name", second_name);
+//		   	       	session.setAttribute("email", email);
 		   	     		   	       	
 		   	       	response.sendRedirect("profile.jsp");
         		} else {

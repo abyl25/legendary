@@ -24,6 +24,16 @@
 <%-- --%>
 
 <% 
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+response.setHeader("Pragma", "no-cache");
+response.setHeader("Expires", "0");
+
+if(session.getAttribute("first_name") == null) {
+	response.sendRedirect("index.jsp");	
+}
+%>
+
+<% 
 int id = 0;
 if (request.getParameter("id") != null) {
 	id = Integer.parseInt(request.getParameter("id"));

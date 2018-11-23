@@ -84,13 +84,19 @@ public class SignIn extends HttpServlet {
 			            response.sendRedirect("index.jsp");
 			            return;			       		
 			       	} 
-			       		
+			       	
+			       	User user = new User();
 	        		while (resultSet2.next()) {
 	        			user_id = resultSet2.getInt("id");
 	        			fname = resultSet2.getString("first_name");
 	        			lname = resultSet2.getString("last_name"); 
 	        			user_email = resultSet2.getString("email");
 	        			user_password = resultSet2.getString("password");
+	        			
+	        			user.id = user_id;
+			   	       	user.fname = fname;
+			   	       	user.lname = lname;
+			   	       	user.email = user_email;
 	                }
 	        		
 	        		if (!entered_password.equals(user_password)) {
@@ -100,11 +106,13 @@ public class SignIn extends HttpServlet {
 	                    return;
 	        		}
 	        		
-		   	       	HttpSession session = request.getSession(true);
-		   	       	session.setAttribute("user_id", user_id);
-		   	       	session.setAttribute("first_name", fname);
-		   	        session.setAttribute("last_name", lname);
-		   	       	session.setAttribute("email", user_email);
+		   	       	HttpSession session = request.getSession(true);		   	       			
+//		   	       	session.setAttribute("user_id", user_id);
+//		   	       	session.setAttribute("first_name", fname);
+//		   	        session.setAttribute("last_name", lname);
+//		   	       	session.setAttribute("email", user_email);
+		   	       	
+		   	       	session.setAttribute("user", user);
 		   	       	
 		   	       	response.sendRedirect("profile.jsp");
 		   	       	
